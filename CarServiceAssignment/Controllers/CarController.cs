@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using CarServiceAssignment.BLL.DTO;
 using CarServiceAssignment.BLL.Interfaces;
 using CarServiceAssignment.BLL.Services;
+using CarServiceAssignment.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarServiceAssignment.Controllers
@@ -20,7 +22,10 @@ namespace CarServiceAssignment.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            IEnumerable<CarDTO> carDTOs = carService.GetCars();
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<CarDTO, CarViewModel>()).CreateMapper();
+            var carsViewModels = mapper.Map<IEnumerable<CarDTO>, IEnumerable<CarViewModel>>(carDTOs);
+            return View(carsViewModels);
         }
     }
 }

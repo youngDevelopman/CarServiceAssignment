@@ -1,4 +1,5 @@
-﻿using CarServiceAssignment.BLL.DTO;
+﻿using AutoMapper;
+using CarServiceAssignment.BLL.DTO;
 using CarServiceAssignment.BLL.Interfaces;
 using CarServiceAssignment.DAL.Entities;
 using CarServiceAssignment.DAL.Interfaces;
@@ -17,8 +18,8 @@ namespace CarServiceAssignment.BLL.Services
 
         public IEnumerable<CarDTO> GetCars()
         {
-            var data = Database.Cars.GetAll();
-            return null;
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Car, CarDTO>()).CreateMapper();
+            return mapper.Map<IEnumerable<Car>, IEnumerable<CarDTO>>(Database.Cars.GetAll());
         }
     }
 }
