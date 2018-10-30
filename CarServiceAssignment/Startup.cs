@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using CarServiceAssignment.BLL.DIConfig;
+using CarServiceAssignment.BLL.DTO;
+using CarServiceAssignment.BLL.MapperSettings;
 using CarServiceAssignment.BLL.Services;
+using CarServiceAssignment.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -26,6 +30,7 @@ namespace CarServiceAssignment
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+           
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -39,6 +44,12 @@ namespace CarServiceAssignment
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<CarDTO, CarViewModel>().ForMember(dto => dto.CarOwners, opt => opt.MapFrom(x => x.CarOwners.Select(y => y.CarOwners).ToList()));
+                cfg.MapModels();
+            });
 
         }
 

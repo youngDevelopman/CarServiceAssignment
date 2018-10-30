@@ -4,6 +4,7 @@ using CarServiceAssignment.BLL.Interfaces;
 using CarServiceAssignment.DAL.Entities;
 using CarServiceAssignment.DAL.Interfaces;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CarServiceAssignment.BLL.Services
 {
@@ -18,8 +19,12 @@ namespace CarServiceAssignment.BLL.Services
 
         public IEnumerable<CarDTO> GetCars()
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Car, CarDTO>()).CreateMapper();
-            return mapper.Map<IEnumerable<Car>, IEnumerable<CarDTO>>(Database.Cars.GetAll());
+            //Mapper.CreateMap<GoodEntity, GoodDTO>()
+            //    .ForMember(dto => dto.providers, opt => opt.MapFrom(x => x.GoodsAndProviders.Select(y => y.Providers).ToList()));
+            var DTOs = Mapper.Map<IEnumerable<Car>, IEnumerable<CarDTO>>(Database.Cars.GetAll());
+            return DTOs;
+            //var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Car, CarDTO>()).CreateMapper();
+            //return mapper.Map<IEnumerable<Car>, IEnumerable<CarDTO>>(Database.Cars.GetAll());
         }
     }
 }

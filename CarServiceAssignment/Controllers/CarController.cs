@@ -23,9 +23,8 @@ namespace CarServiceAssignment.Controllers
         public IActionResult Index()
         {
             IEnumerable<CarDTO> carDTOs = carService.GetCars();
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<CarDTO, CarViewModel>()).CreateMapper();
-            var carsViewModels = mapper.Map<IEnumerable<CarDTO>, IEnumerable<CarViewModel>>(carDTOs);
-            return View(carsViewModels);
+            var DTOs = Mapper.Map<IEnumerable<CarDTO>, IEnumerable<CarViewModel>>(carDTOs);
+            return View(DTOs);
         }
     }
 }

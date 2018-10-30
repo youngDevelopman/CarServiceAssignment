@@ -20,6 +20,12 @@ namespace CarServiceAssignment.DAL.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+            // Data seeding
+            modelBuilder.Entity<Car>().HasData(
+                new { Id = 1, Brand = "BMW", Model = "X6", Type = "Heavyweight", Price = 10000.9m, Year = DateTime.Now });
+
+            // Relationships between tables
             modelBuilder.Entity<CarOwner>().
                 HasKey(t => new { t.CarId,t.OwnerId });
 
@@ -32,6 +38,7 @@ namespace CarServiceAssignment.DAL.EF
                 .HasOne(sc => sc.Owner)
                 .WithMany(c => c.CarOwners)
                 .HasForeignKey(sc => sc.CarId);
+
         }
     }
 }

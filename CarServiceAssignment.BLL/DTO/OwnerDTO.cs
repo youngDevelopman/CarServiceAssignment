@@ -11,5 +11,8 @@ namespace CarServiceAssignment.BLL.DTO
         public string LastName { get; set; }
         public DateTime Birthdate { get; set; }
         public DateTime DrivingExperience { get; set; }
+
+
+        public ICollection<CarDTO> CarOwners { get; set; }
     }
 }
