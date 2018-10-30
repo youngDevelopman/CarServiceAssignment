@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace CarServiceAssignment.DAL.Entities
+namespace CarServiceAssignment.Models
 {
-    public class Owner
+    public class OwnerViewModel
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
@@ -12,12 +11,6 @@ namespace CarServiceAssignment.DAL.Entities
         public DateTime Birthdate { get; set; }
         public DateTime DrivingExperience { get; set; }
 
-
-        public  ICollection<CarOwner> CarOwners { get; set; }
-
-        public Owner()
-        {
-            CarOwners = new List<CarOwner>();
-        }
+        public virtual ICollection<CarViewModel> Cars { get; set; }
     }
 }

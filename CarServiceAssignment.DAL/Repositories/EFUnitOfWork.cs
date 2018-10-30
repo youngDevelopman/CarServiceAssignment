@@ -14,6 +14,10 @@ namespace CarServiceAssignment.DAL.Repositories
         private CarRepository carRepository;
         private OwnerRepository ownerRepository;
 
+        public EFUnitOfWork(CarServiceContext context)
+        {
+            this.db = context;
+        }
 
         public IRepository<Car> Cars
         {
