@@ -13,6 +13,9 @@ namespace CarServiceAssignment.BLL.MapperSettings
         public static void MapModels(this IMapperConfigurationExpression cfg)
         {
             cfg.CreateMap<Car, CarDTO>().ForMember(dto => dto.CarOwners, opt => opt.MapFrom(x => x.CarOwners.Select(y => y.Owner).ToList()));
+            cfg.CreateMap<CarDTO, Car>().ForMember(dto => dto.CarOwners, opt => opt.MapFrom(x => x.CarOwners.Select(y => y.CarOwners).ToList()));
+
+
             cfg.CreateMap<Owner, OwnerDTO>().ForMember(dto => dto.CarOwners, opt => opt.MapFrom(x => x.CarOwners.Select(y => y.Owner).ToList()));
         }
     }

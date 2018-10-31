@@ -8,5 +8,6 @@ namespace CarServiceAssignment.BLL.Interfaces
     public interface ICarService
     {
         IEnumerable<CarDTO> GetCars();
+        void UpdateCarInfo(CarDTO carDTO);
     }
 }

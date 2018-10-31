@@ -9,6 +9,7 @@ using CarServiceAssignment.BLL.Services;
 using CarServiceAssignment.Models;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace CarServiceAssignment.Controllers
 {
     public class CarController : Controller
@@ -25,6 +26,28 @@ namespace CarServiceAssignment.Controllers
             IEnumerable<CarDTO> carDTOs = carService.GetCars();
             var DTOs = Mapper.Map<IEnumerable<CarDTO>, IEnumerable<CarViewModel>>(carDTOs);
             return View(DTOs);
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            IEnumerable<CarDTO> carDTOs = carService.GetCars();
+            var carViewModel = Mapper.Map<IEnumerable<CarDTO>, IEnumerable<CarViewModel>>(carDTOs).SingleOrDefault(c => c.Id == id);
+
+            if(carViewModel == null)
+            {
+                return NotFound();
+            }
+
+            return View(carViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(CarViewModel carViewModel)
+        {
+            var carDTO = Mapper.Map<CarViewModel, CarDTO>(carViewModel);
+            carService.UpdateCarInfo(carDTO);
+            return RedirectToAction("Index");
         }
     }
 }

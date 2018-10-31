@@ -48,6 +48,7 @@ namespace CarServiceAssignment
             Mapper.Initialize(cfg =>
             {
                 cfg.CreateMap<CarDTO, CarViewModel>().ForMember(dto => dto.CarOwners, opt => opt.MapFrom(x => x.CarOwners.Select(y => y.CarOwners).ToList()));
+                cfg.CreateMap<CarViewModel, CarDTO>().ForMember(dto => dto.CarOwners, opt => opt.MapFrom(x => x.CarOwners.Select(y => y.CarOwners).ToList()));
                 cfg.MapModels();
             });
 

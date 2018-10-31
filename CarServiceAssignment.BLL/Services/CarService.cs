@@ -19,12 +19,15 @@ namespace CarServiceAssignment.BLL.Services
 
         public IEnumerable<CarDTO> GetCars()
         {
-            //Mapper.CreateMap<GoodEntity, GoodDTO>()
-            //    .ForMember(dto => dto.providers, opt => opt.MapFrom(x => x.GoodsAndProviders.Select(y => y.Providers).ToList()));
             var DTOs = Mapper.Map<IEnumerable<Car>, IEnumerable<CarDTO>>(Database.Cars.GetAll());
             return DTOs;
-            //var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Car, CarDTO>()).CreateMapper();
-            //return mapper.Map<IEnumerable<Car>, IEnumerable<CarDTO>>(Database.Cars.GetAll());
+        }
+
+        public void UpdateCarInfo(CarDTO carDTO)
+        {
+            var updatedCar = Mapper.Map<CarDTO, Car>(carDTO);
+            Database.Cars.Update(updatedCar);
+            Database.Save();
         }
     }
 }
