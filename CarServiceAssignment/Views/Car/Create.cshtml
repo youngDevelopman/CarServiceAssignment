@@ -1,0 +1,38 @@
+﻿@model CarViewModel
+@{
+  ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+  <div class="form-group">
+    @Html.LabelFor(c => c.Brand)
+    @Html.TextBoxFor(c => c.Brand, new { @class = "form-control" })
+  </div>
+  <div class="form-group">
+    @Html.LabelFor(c => c.Model)
+    @Html.TextBoxFor(c => c.Model, new { @class = "form-control" })
+  </div>
+  <div class="form-group">
+    @Html.LabelFor(c => c.Type)
+    @Html.DropDownListFor(c => c.Type,new List<SelectListItem>() { new SelectListItem { Text="Passenger car",Value= "Passenger",Selected = true },
+            new SelectListItem { Value="Truck",Text="Truck" }  })
+  </div>
+  <div class="form-group">
+    @Html.LabelFor(c => c.Price)
+    @Html.TextBoxFor(c => c.Price, new { @class = "form-control" })
+  </div>
+  <div class="form-group">
+    @Html.LabelFor(c => c.Year)
+    @Html.TextBoxFor(c => c.Year, new { @class = "form-control" })
+  </div>
+  <div class="form-group">
+    @Html.LabelFor(c => c.CarOwners)
+  </div>
+  @Html.HiddenFor(c => c.Id)
+
+  <button type="submit" class="btn btn-primary ">Save</button>
+}
+

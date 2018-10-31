@@ -35,5 +35,12 @@ namespace CarServiceAssignment.BLL.Services
             Database.Cars.Delete(id);
             Database.Save();
         }
+
+        public void CreateCar(CarDTO carDTO)
+        {
+            var createdCar = Mapper.Map<CarDTO, Car>(carDTO);
+            Database.Cars.Create(createdCar);
+            Database.Save();
+        }
     }
 }

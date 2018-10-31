@@ -45,15 +45,13 @@
         <td>
           <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
           @Html.ActionLink("Delete", "Delete","Car", new { id = item.Id },
-            new { onclick = "return confirm('Are you sure you wish to delete this article?');",
+            new { onclick = "return confirm('Are you sure you wish to delete this car?');",
             });
-            
-          @*<a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>*@
         </td>
       </tr>
     }
   </tbody>
+  
 </table>
-
+@Html.ActionLink("Add car", "Create", "Car");
  

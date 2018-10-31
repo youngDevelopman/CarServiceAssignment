@@ -62,5 +62,21 @@ namespace CarServiceAssignment.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(CarViewModel carViewModel)
+        {
+            
+            var carDTO = Mapper.Map<CarViewModel, CarDTO>(carViewModel);
+            carService.CreateCar(carDTO);
+
+            return RedirectToAction("Index");
+        }
     }
 }
