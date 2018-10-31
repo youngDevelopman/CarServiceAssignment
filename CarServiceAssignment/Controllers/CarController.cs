@@ -24,15 +24,16 @@ namespace CarServiceAssignment.Controllers
         public IActionResult Index()
         {
             IEnumerable<CarDTO> carDTOs = carService.GetCars();
-            var DTOs = Mapper.Map<IEnumerable<CarDTO>, IEnumerable<CarViewModel>>(carDTOs);
-            return View(DTOs);
+            IEnumerable<CarViewModel> carViewModel = Mapper.Map<IEnumerable<CarDTO>, IEnumerable<CarViewModel>>(carDTOs);
+
+            return View(carViewModel);
         }
 
         [HttpGet]
         public IActionResult Edit(int id)
         {
             IEnumerable<CarDTO> carDTOs = carService.GetCars();
-            var carViewModel = Mapper.Map<IEnumerable<CarDTO>, IEnumerable<CarViewModel>>(carDTOs).SingleOrDefault(c => c.Id == id);
+            CarViewModel carViewModel = Mapper.Map<IEnumerable<CarDTO>, IEnumerable<CarViewModel>>(carDTOs).SingleOrDefault(c => c.Id == id);
 
             if(carViewModel == null)
             {
@@ -45,8 +46,9 @@ namespace CarServiceAssignment.Controllers
         [HttpPost]
         public IActionResult Edit(CarViewModel carViewModel)
         {
-            var carDTO = Mapper.Map<CarViewModel, CarDTO>(carViewModel);
+            CarDTO carDTO = Mapper.Map<CarViewModel, CarDTO>(carViewModel);
             carService.UpdateCarInfo(carDTO);
+
             return RedirectToAction("Index");
         }
 
@@ -73,7 +75,7 @@ namespace CarServiceAssignment.Controllers
         public IActionResult Create(CarViewModel carViewModel)
         {
             
-            var carDTO = Mapper.Map<CarViewModel, CarDTO>(carViewModel);
+            CarDTO carDTO = Mapper.Map<CarViewModel, CarDTO>(carViewModel);
             carService.CreateCar(carDTO);
 
             return RedirectToAction("Index");
