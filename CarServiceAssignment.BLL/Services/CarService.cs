@@ -29,5 +29,11 @@ namespace CarServiceAssignment.BLL.Services
             Database.Cars.Update(updatedCar);
             Database.Save();
         }
+
+        public void DeleteCar(int id)
+        {
+            Database.Cars.Delete(id);
+            Database.Save();
+        }
     }
 }

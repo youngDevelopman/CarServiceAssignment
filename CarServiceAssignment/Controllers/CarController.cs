@@ -49,5 +49,18 @@ namespace CarServiceAssignment.Controllers
             carService.UpdateCarInfo(carDTO);
             return RedirectToAction("Index");
         }
+
+        
+        public IActionResult Delete(int? id)
+        {
+            if(id == null)
+            {
+                return NotFound();
+            }
+
+            carService.DeleteCar(id.GetValueOrDefault());
+
+            return RedirectToAction("Index");
+        }
     }
 }

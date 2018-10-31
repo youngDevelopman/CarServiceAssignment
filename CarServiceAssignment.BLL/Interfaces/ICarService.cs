@@ -9,5 +9,6 @@ namespace CarServiceAssignment.BLL.Interfaces
     {
         IEnumerable<CarDTO> GetCars();
         void UpdateCarInfo(CarDTO carDTO);
+        void DeleteCar(int id);
     }
 }
