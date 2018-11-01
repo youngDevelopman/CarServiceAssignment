@@ -68,17 +68,29 @@ namespace CarServiceAssignment.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            IEnumerable<CarDTO> carDTOs = carService.GetCars();
+            CarViewModel carViewModel = Mapper.Map<CarDTO, CarViewModel>(carDTOs.Last());
+            CarViewModel newCarViewModel = new CarViewModel { Id = carViewModel.Id++ };
+
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(CarViewModel carViewModel)
+        public IActionResult Create([Bind(include:new string[] { "Brand","Model","Type","Price","Year","CarOwners" })]CarViewModel carViewModel)
         {
-            
-            CarDTO carDTO = Mapper.Map<CarViewModel, CarDTO>(carViewModel);
-            carService.CreateCar(carDTO);
 
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                CarDTO carDTO = Mapper.Map<CarViewModel, CarDTO>(carViewModel);
+                carService.CreateCar(carDTO);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
+
+           
         }
     }
 }
