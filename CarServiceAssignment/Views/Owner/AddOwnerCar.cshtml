@@ -1,0 +1,21 @@
+﻿@model CarOwnerViewModel
+@{
+    ViewData["Title"] = "AddOwnerCar";
+}
+
+<h2>AddOwnerCar</h2>
+
+<form asp-controller="Owner" asp-action="AddOwnerCar">
+  <div class="form-group">
+    <div class="row">
+      <div class="alert-danger" asp-validation-summary="ModelOnly"></div>
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+        <select asp-for="CarId"
+                class="form-control"
+                asp-items="@(new SelectList(ViewBag.CarsToChose,"Id","Brand"))"></select>
+      </div>
+    </div>
+  </div>
+  @Html.HiddenFor(m => m.OwnerId);
+  <input type="submit" />
+</form>

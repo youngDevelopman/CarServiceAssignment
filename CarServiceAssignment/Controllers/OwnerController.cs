@@ -13,10 +13,13 @@ namespace CarServiceAssignment.Controllers
     public class OwnerController : Controller
     {
         IOwnerService ownerService;
+        ICarService carService;
 
-        public OwnerController(IOwnerService service)
+        public OwnerController(IOwnerService ownerService, ICarService carService)
         {
-            ownerService = service;
+            this.ownerService = ownerService;
+            this.carService = carService;
+
         }
 
 
@@ -83,6 +86,29 @@ namespace CarServiceAssignment.Controllers
             {
                 return View();
             }
+        }
+
+        [HttpGet]
+        public IActionResult AddOwnerCar(int? id)
+        {
+            IEnumerable<CarDTO> carDTOs = carService.GetCars();
+            IEnumerable<CarViewModel> carViewModel = Mapper.Map<IEnumerable<CarDTO>, IEnumerable<CarViewModel>>(carDTOs);
+
+            CarOwnerViewModel carOwnerViewModel = new CarOwnerViewModel()
+            {
+                OwnerId = id.GetValueOrDefault(),
+            };
+
+            ViewBag.CarsToChose = new List<CarViewModel>(carViewModel);
+            return View(carOwnerViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult AddOwnerCar(CarOwnerViewModel carOwnerViewModel)
+        {
+            ownerService.AddCarForOwner(carOwnerViewModel.OwnerId, carOwnerViewModel.CarId);
+
+            return RedirectToAction("Index");
         }
     }
 }

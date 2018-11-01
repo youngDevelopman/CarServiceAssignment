@@ -11,5 +11,6 @@ namespace CarServiceAssignment.BLL.Interfaces
         void UpdateOwnerInfo(OwnerDTO ownerDTO);
         void DeleteOwner(int id);
         void CreateOwner(OwnerDTO ownerDTO);
+        void AddCarForOwner(int ownerId, int carId);
     }
 }

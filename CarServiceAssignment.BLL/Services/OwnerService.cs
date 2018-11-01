@@ -44,5 +44,19 @@ namespace CarServiceAssignment.BLL.Services
             Database.Owners.Create(updatedOwner);
             Database.Save();
         }
+
+        public void AddCarForOwner(int ownerId, int carId)
+        {
+            Owner owner = Database.Owners.Get(ownerId);
+            Car car = Database.Cars.Get(carId);
+
+            owner.CarOwners.Add(new CarOwner()
+            {
+                CarId = car.Id,
+                OwnerId = owner.Id
+            });
+
+            Database.Save();
+        }
     }
 }
