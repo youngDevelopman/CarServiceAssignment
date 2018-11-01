@@ -42,7 +42,8 @@ namespace OwnerServiceAssignment.DAL.Repositories
 
         public IEnumerable<Owner> GetAll()
         {
-            return db.Owners;
+            var owners = db.Owners.Include(o => o.CarOwners).ThenInclude(c => c.Car).ToList();
+            return owners;
         }
 
         public void Update(Owner car)

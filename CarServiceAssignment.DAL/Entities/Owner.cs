@@ -15,7 +15,7 @@ namespace CarServiceAssignment.DAL.Entities
         public string DrivingExperience { get; set; }
 
 
-        public  ICollection<CarOwner> CarOwners { get; set; }
+        public ICollection<CarOwner> CarOwners { get; set; }
 
         public Owner()
         {
