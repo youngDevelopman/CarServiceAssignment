@@ -9,16 +9,16 @@ namespace CarServiceAssignment.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please, enter the correct first name")]
         public string FirstName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please, enter the correct last name")]
         public string LastName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please, enter the correct birthdate")]
         public DateTime? Birthdate { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please, enter the correct driving experience")]
         public string DrivingExperience { get; set; }
 
         public virtual ICollection<CarViewModel> CarOwners { get; set; }
