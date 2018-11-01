@@ -62,5 +62,27 @@ namespace CarServiceAssignment.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create([Bind(include: new string[] { "FirstName", "LastName", "Birthdate", "DrivingExperience"})]OwnerViewModel ownerViewModel)
+        {
+
+            if (ModelState.IsValid)
+            {
+                OwnerDTO carDTO = Mapper.Map<OwnerViewModel, OwnerDTO>(ownerViewModel);
+                ownerService.CreateOwner(carDTO);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View();
+            }
+        }
     }
 }
