@@ -27,5 +27,28 @@ namespace CarServiceAssignment.Controllers
 
             return View(ownerViewModel);
         }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            IEnumerable<OwnerDTO> ownerDTO = ownerService.GetOwners();
+            OwnerViewModel ownerViewModel = Mapper.Map<IEnumerable<OwnerDTO>, IEnumerable<OwnerViewModel>>(ownerDTO).SingleOrDefault(c => c.Id == id);
+
+            if (ownerViewModel == null)
+            {
+                return NotFound();
+            }
+
+            return View(ownerViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(OwnerViewModel ownerViewModel)
+        {
+            OwnerDTO ownerDTO = Mapper.Map<OwnerViewModel, OwnerDTO>(ownerViewModel);
+            ownerService.UpdateOwnerInfo(ownerDTO);
+
+            return RedirectToAction("Index");
+        }
     }
 }

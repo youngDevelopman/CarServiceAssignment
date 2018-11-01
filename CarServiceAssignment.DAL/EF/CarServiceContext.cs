@@ -26,6 +26,9 @@ namespace CarServiceAssignment.DAL.EF
             modelBuilder.Entity<Car>().HasData(
                 new { Id = 1, Brand = "BMW", Model = "X6", Type = "Heavyweight", Price = 10000.9m, Year = DateTime.Now });
 
+            modelBuilder.Entity<Owner>().HasData(
+               new { Id = 1, FirstName = "John", LastName = "Marston", Birthdate = new DateTime(1980,3,20), DrivingExperience = "5-10 years" });
+
             // Relationships between tables
             modelBuilder.Entity<CarOwner>().
                 HasKey(t => new { t.CarId,t.OwnerId });
