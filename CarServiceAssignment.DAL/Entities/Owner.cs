@@ -12,7 +12,7 @@ namespace CarServiceAssignment.DAL.Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime Birthdate { get; set; }
-        public DateTime DrivingExperience { get; set; }
+        public string DrivingExperience { get; set; }
 
 
         public  ICollection<CarOwner> CarOwners { get; set; }

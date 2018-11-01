@@ -15,6 +15,7 @@ namespace CarServiceAssignment.BLL.DIConfig
         public static void AddBllServices(this IServiceCollection services)
         {
             services.AddScoped<ICarService, CarService>();
+            services.AddScoped<IOwnerService, OwnerService>();
         }
 
         public static void AddDalServices(this IServiceCollection services, string connectionString)
