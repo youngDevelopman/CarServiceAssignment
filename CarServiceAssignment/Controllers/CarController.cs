@@ -68,10 +68,6 @@ namespace CarServiceAssignment.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            IEnumerable<CarDTO> carDTOs = carService.GetCars();
-            CarViewModel carViewModel = Mapper.Map<CarDTO, CarViewModel>(carDTOs.Last());
-            CarViewModel newCarViewModel = new CarViewModel { Id = carViewModel.Id++ };
-
             return View();
         }
 
@@ -87,10 +83,8 @@ namespace CarServiceAssignment.Controllers
             }
             else
             {
-                return BadRequest(ModelState);
+                return View();
             }
-
-           
         }
     }
 }

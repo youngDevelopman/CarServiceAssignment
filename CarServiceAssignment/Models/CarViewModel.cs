@@ -12,21 +12,21 @@ namespace CarServiceAssignment.Models
         
         public int Id { get; set; }
 
-        [Required(ErrorMessage ="Please, enter the brand name")]
+        [Required(ErrorMessage ="Please, enter the correct brand name")]
         public string Brand { get; set; }
 
-        [Required(ErrorMessage = "Please, enter the model name")]
+        [Required(ErrorMessage = "Please, enter the correct model name")]
         public string Model { get; set; }
 
-        [Required(ErrorMessage = "Please, enter the type")]
+        [Required(ErrorMessage = "Please, enter the correct type")]
         public string Type { get; set; }
 
-        [Required(ErrorMessage = "Please, enter the Price")]
-        public decimal Price { get; set; }
+        [Required(ErrorMessage = "Please, enter the correct price")]
+        public decimal? Price { get; set; }
 
-        [Required(ErrorMessage ="Please,enter the year")]
+        [Required(ErrorMessage ="Please,enter the correct year")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
-        public DateTime Year { get; set; }
+        public DateTime? Year { get; set; }
 
         public virtual ICollection<OwnerViewModel> CarOwners { get; set; }
 
