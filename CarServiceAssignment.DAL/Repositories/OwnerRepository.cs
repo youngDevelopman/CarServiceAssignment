@@ -55,6 +55,16 @@ namespace OwnerServiceAssignment.DAL.Repositories
 
         public void Update(int ownerId, int carId)
         {
+            var owner = db.Owners.Include(x => x.CarOwners).Where(x => x.Id == ownerId).FirstOrDefault();
+
+            foreach (var car in owner.CarOwners)
+            {
+                if (car.CarId == carId)
+                {
+                    return;
+                }
+            }
+            //if(owner.CarOwners.)
             var carOwner = new CarOwner()
             {
                 Car = db.Cars.Find(carId),
@@ -63,7 +73,7 @@ namespace OwnerServiceAssignment.DAL.Repositories
                 OwnerId = ownerId
             };
 
-            var owner = db.Owners.Include(x => x.CarOwners).Where(x => x.Id == ownerId).FirstOrDefault();
+           
             owner.CarOwners.Add(carOwner);
             this.Update(owner);
             db.SaveChanges();
