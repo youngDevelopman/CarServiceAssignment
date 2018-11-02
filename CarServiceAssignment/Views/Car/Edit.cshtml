@@ -2,33 +2,39 @@
 @{
   ViewData["Title"] = "Edit";
 }
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+
 <h2>Edit</h2>
 
 @using (Html.BeginForm())
 {
-  <div class="form-group">
-    @Html.LabelFor(c => c.Brand)
-    @Html.TextBoxFor(c => c.Brand, new { @class = "form-control" })
-  </div>
-  <div class="form-group">
-    @Html.LabelFor(c => c.Model)
-    @Html.TextBoxFor(c => c.Model, new { @class = "form-control" })
-  </div>
-  <div class="form-group">
-    @Html.LabelFor(c => c.Type)
-    @Html.DropDownListFor(c => c.Type,new List<SelectListItem>() { new SelectListItem { Text="Passenger car",Value= "Passenger",Selected = true },
-            new SelectListItem { Value="Truck",Text="Truck" }  })
-  </div>
-  <div class="form-group">
-    @Html.LabelFor(c => c.Price)
-    @Html.TextBoxFor(c => c.Price, new { @class = "form-control" })
-  </div>
-  <div class="form-group">
-    @Html.LabelFor(c => c.Year)
-    @Html.EditorFor(c => c.Year)
-  </div>
+<div class="form-group">
+  @Html.LabelFor(c => c.Brand)
+  @Html.TextBoxFor(c => c.Brand, new { @class = "form-control" })
+  <span asp-validation-for="Brand" class="text-danger"></span>
+</div>
+<div class="form-group">
+  @Html.LabelFor(c => c.Model)
+  @Html.TextBoxFor(c => c.Model, new { @class = "form-control" })
+  <span asp-validation-for="Model" class="text-danger"></span>
+</div>
+<div class="form-group">
+  @Html.LabelFor(c => c.Type)
+  @Html.DropDownListFor(c => c.Type,new List<SelectListItem>() { new SelectListItem { Text="Passenger car",Value= "Passenger",Selected = true },
+          new SelectListItem { Value="Truck",Text="Truck" }  })
+  <span asp-validation-for="Type" class="text-danger"></span>
+</div>
+<div class="form-group">
+  @Html.LabelFor(c => c.Price)
+  @Html.TextBoxFor(c => c.Price, new { @class = "form-control" })
+  <span asp-validation-for="Price" class="text-danger"></span>
+</div>
+<div class="form-group">
+  @Html.LabelFor(c => c.Year)
+  @Html.EditorFor(c => c.Year)
+  <span asp-validation-for="Year" class="text-danger"></span>
+</div>
   <div class="form-group">
     @Html.LabelFor(c => c.CarOwners)
   </div>

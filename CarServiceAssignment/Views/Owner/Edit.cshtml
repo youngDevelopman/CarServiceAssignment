@@ -5,31 +5,37 @@
 
 <h2>Edit</h2>
 
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
 
 @using (Html.BeginForm())
 {
-  <div class="form-group">
-    @Html.LabelFor(c => c.FirstName)
-    @Html.TextBoxFor(c => c.FirstName, new { @class = "form-control" })
-  </div>
-  <div class="form-group">
-    @Html.LabelFor(c => c.LastName)
-    @Html.TextBoxFor(c => c.LastName, new { @class = "form-control" })
-  </div>
-  <div class="form-group">
-    @Html.LabelFor(c => c.Birthdate)
-    @Html.TextBoxFor(c => c.Birthdate, new { @class = "form-control" })
-  </div>
-  <div class="form-group">
-    @Html.LabelFor(c => c.DrivingExperience)
-    @Html.DropDownListFor(c => c.DrivingExperience,new List<SelectListItem>() {
-    new SelectListItem { Text="less than a 1 year",Value= "less than a 1 year",Selected= true },
-            new SelectListItem { Value="1 - 5 years",Text="1 - 5 years" },
-            new SelectListItem { Value="5 - 10 years",Text="5 - 10 years" },
-            new SelectListItem { Value="10 - 15 years",Text="10 - 15 years" },
-            new SelectListItem { Value="15 - 20 years",Text="15 - 20 years" },
-            new SelectListItem { Value="more than 20 years",Text="more than 20 years" }})
-  </div>
+<div class="form-group">
+  @Html.LabelFor(c => c.FirstName)
+  @Html.TextBoxFor(c => c.FirstName, new { @class = "form-control" })
+  <span asp-validation-for="FirstName" class="text-danger"></span>
+</div>
+<div class="form-group">
+  @Html.LabelFor(c => c.LastName)
+  @Html.TextBoxFor(c => c.LastName, new { @class = "form-control" })
+  <span asp-validation-for="LastName" class="text-danger"></span>
+</div>
+<div class="form-group">
+  @Html.LabelFor(c => c.Birthdate)
+  @Html.TextBoxFor(c => c.Birthdate, new { @class = "form-control" })
+  <span asp-validation-for="Birthdate" class="text-danger"></span>
+</div>
+<div class="form-group">
+  @Html.LabelFor(c => c.DrivingExperience)
+  @Html.DropDownListFor(c => c.DrivingExperience,new List<SelectListItem>() {
+  new SelectListItem { Text="less than a 1 year",Value= "less than a 1 year",Selected= true },
+          new SelectListItem { Value="1 - 5 years",Text="1 - 5 years" },
+          new SelectListItem { Value="5 - 10 years",Text="5 - 10 years" },
+          new SelectListItem { Value="10 - 15 years",Text="10 - 15 years" },
+          new SelectListItem { Value="15 - 20 years",Text="15 - 20 years" },
+          new SelectListItem { Value="more than 20 years",Text="more than 20 years" }})
+  <span asp-validation-for="DrivingExperience" class="text-danger"></span>
+</div>
   @Html.HiddenFor(c => c.Id)
 
   <button type="submit" class="btn btn-primary ">Save</button>

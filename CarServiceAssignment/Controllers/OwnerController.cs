@@ -48,10 +48,18 @@ namespace CarServiceAssignment.Controllers
         [HttpPost]
         public IActionResult Edit(OwnerViewModel ownerViewModel)
         {
-            OwnerDTO ownerDTO = Mapper.Map<OwnerViewModel, OwnerDTO>(ownerViewModel);
-            ownerService.UpdateOwnerInfo(ownerDTO);
+            if (ModelState.IsValid)
+            {
+                OwnerDTO ownerDTO = Mapper.Map<OwnerViewModel, OwnerDTO>(ownerViewModel);
+                ownerService.UpdateOwnerInfo(ownerDTO);
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View();
+            }
+
         }
 
         public IActionResult Delete(int? id)

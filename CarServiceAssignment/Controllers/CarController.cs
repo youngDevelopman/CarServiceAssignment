@@ -46,10 +46,17 @@ namespace CarServiceAssignment.Controllers
         [HttpPost]
         public IActionResult Edit(CarViewModel carViewModel)
         {
-            CarDTO carDTO = Mapper.Map<CarViewModel, CarDTO>(carViewModel);
-            carService.UpdateCarInfo(carDTO);
+            if (ModelState.IsValid)
+            {
+                CarDTO carDTO = Mapper.Map<CarViewModel, CarDTO>(carViewModel);
+                carService.UpdateCarInfo(carDTO);
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View();
+            }
         }
 
         
