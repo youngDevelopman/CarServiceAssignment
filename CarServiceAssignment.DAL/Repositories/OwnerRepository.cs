@@ -31,6 +31,14 @@ namespace OwnerServiceAssignment.DAL.Repositories
                 db.Owners.Remove(car);
         }
 
+        public void DeleteCarOwner(int ownerId, int carId)
+        {
+            var owner = this.Get(ownerId);
+            var carToDelete = owner.CarOwners.Where(c => c.CarId == carId).SingleOrDefault();
+            owner.CarOwners.Remove(carToDelete);
+            db.SaveChanges();
+        }
+
         public IEnumerable<Owner> Find(Func<Owner, bool> predicate)
         {
             return db.Owners.Where(predicate).ToList();

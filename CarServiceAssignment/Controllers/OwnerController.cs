@@ -118,5 +118,18 @@ namespace CarServiceAssignment.Controllers
 
             return RedirectToAction("Index");
         }
+
+        
+        public IActionResult DeleteCarOwner(int? ownerId,int? carId)
+        {
+            if (ownerId == null)
+            {
+                return NotFound();
+            }
+
+            ownerService.DeleteCarOwner(ownerId.GetValueOrDefault(),carId.GetValueOrDefault());
+
+            return RedirectToAction("Index");
+        }
     }
 }

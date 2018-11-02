@@ -49,5 +49,10 @@ namespace CarServiceAssignment.BLL.Services
         {
             Database.Owners.Update(ownerId, carId);
         }
+
+        public void DeleteCarOwner(int ownerId, int carId)
+        {
+            Database.Owners.DeleteCarOwner(ownerId,carId);
+        }
     }
 }
