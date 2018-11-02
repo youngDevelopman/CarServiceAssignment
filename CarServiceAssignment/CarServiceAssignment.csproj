@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <AssemblyName>CarServiceAssignment.PL</AssemblyName>
+    <RootNamespace>CarServiceAssignment.PL</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
