@@ -21,7 +21,7 @@ namespace CarServiceAssignment.BLL.DIConfig
         public static void AddDalServices(this IServiceCollection services, string connectionString)
         {
             services.AddDbContext<CarServiceContext>(options =>
-                options.UseSqlServer(connectionString));
+                options.UseSqlServer(connectionString), ServiceLifetime.Singleton);
             services.AddScoped<CarServiceContext>();
             services.AddScoped<IUnitOfWork, EFUnitOfWork>();
         }

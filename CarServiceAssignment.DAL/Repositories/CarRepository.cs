@@ -1,4 +1,5 @@
-﻿using CarServiceAssignment.DAL.EF;
+﻿using CarServiceAssignment.DAL.DbExtentions;
+using CarServiceAssignment.DAL.EF;
 using CarServiceAssignment.DAL.Entities;
 using CarServiceAssignment.DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -36,13 +37,15 @@ namespace CarServiceAssignment.DAL.Repositories
         }
 
         public Car Get(int id)
-        { 
-            return db.Cars.Find(id);
+        {
+            var car = db.Cars.Include(o => o.CarOwners).ThenInclude(c => c.Owner).ToList().SingleOrDefault(o => o.Id == id);
+            return car;
         }
 
         public IEnumerable<Car> GetAll()
         {
-            return db.Cars;
+            var car = db.Cars.Include(o => o.CarOwners).ThenInclude(c => c.Owner).ToList();
+            return car;
         }
 
         public void Update(Car car)

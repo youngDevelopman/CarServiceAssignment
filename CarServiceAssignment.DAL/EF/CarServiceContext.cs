@@ -22,14 +22,15 @@ namespace CarServiceAssignment.DAL.EF
         {
             base.OnModelCreating(modelBuilder);
             
-            // Data seeding
-            modelBuilder.Entity<Car>().HasData(
-                new { Id = 1, Brand = "BMW", Model = "X6", Type = "Heavyweight", Price = 10000.9m, Year = DateTime.Now });
-
-            modelBuilder.Entity<Owner>().HasData(
-               new { Id = 1, FirstName = "John", LastName = "Marston", Birthdate = new DateTime(1980,3,20), DrivingExperience = "5-10 years" });
-
             // Relationships between tables
+            modelBuilder.Entity<Car>()
+                .Property(b => b.Id)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Car>()
+                .Property(b => b.Id)
+                .ValueGeneratedOnAdd();
+
             modelBuilder.Entity<CarOwner>().
                 HasKey(t => new { t.CarId,t.OwnerId });
 
@@ -41,7 +42,16 @@ namespace CarServiceAssignment.DAL.EF
             modelBuilder.Entity<CarOwner>()
                 .HasOne(sc => sc.Owner)
                 .WithMany(c => c.CarOwners)
-                .HasForeignKey(sc => sc.CarId);
+                .HasForeignKey(sc => sc.OwnerId);
+
+            // Data seeding
+            modelBuilder.Entity<Car>().HasData(
+                new { Id = 1, Brand = "BMW", Model = "X6", Type = "Passenger car", Price = 10000.9m, Year = DateTime.Now },
+                 new { Id = 2, Brand = "Mercedez", Model = "CLS", Type = "Passenger car", Price = 12000.0m, Year = DateTime.Now });
+
+            modelBuilder.Entity<Owner>().HasData(
+               new { Id = 1, FirstName = "John", LastName = "Marston", Birthdate = new DateTime(1980, 3, 20), DrivingExperience = "5-10 years" },
+               new { Id = 2, FirstName = "Bill", LastName = "Gates", Birthdate = new DateTime(1980, 3, 20), DrivingExperience = "less than a 1 year" });
 
         }
     }

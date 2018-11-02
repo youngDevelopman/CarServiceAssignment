@@ -31,7 +31,7 @@ namespace CarServiceAssignment.DAL.Repositories
             }
         }
 
-        public IRepository<Owner> Owners
+        public IOwnerRepository Owners
         {
             get
             {

@@ -5,10 +5,8 @@ using System.Text;
 
 namespace CarServiceAssignment.DAL.Interfaces
 {
-    public interface IUnitOfWork : IDisposable
+    public interface IOwnerRepository : IRepository<Owner>
     {
-        IRepository<Car> Cars { get; }
-        IOwnerRepository Owners { get;}
-        void Save();
+        void Update(int ownerId, int carId);
     }
 }

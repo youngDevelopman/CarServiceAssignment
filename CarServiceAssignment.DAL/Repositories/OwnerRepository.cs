@@ -1,4 +1,5 @@
 ﻿
+using CarServiceAssignment.DAL.DbExtentions;
 using CarServiceAssignment.DAL.EF;
 using CarServiceAssignment.DAL.Entities;
 using CarServiceAssignment.DAL.Interfaces;
@@ -9,7 +10,7 @@ using System.Linq;
 
 namespace OwnerServiceAssignment.DAL.Repositories
 {
-    public class OwnerRepository: IRepository<Owner> 
+    public class OwnerRepository: IOwnerRepository 
     {
         private CarServiceContext db;
 
@@ -37,7 +38,8 @@ namespace OwnerServiceAssignment.DAL.Repositories
 
         public Owner Get(int id)
         {
-            return db.Owners.Find(id);
+            var owner = db.Owners.Include(o => o.CarOwners).ThenInclude(c => c.Car).ToList().SingleOrDefault(o => o.Id == id);
+            return owner;
         }
 
         public IEnumerable<Owner> GetAll()
@@ -46,9 +48,25 @@ namespace OwnerServiceAssignment.DAL.Repositories
             return owners;
         }
 
-        public void Update(Owner car)
+        public void Update(Owner owner)
         {
-            db.Entry(car).State = EntityState.Modified;
+            db.Entry(owner).State = EntityState.Modified;
+        }
+
+        public void Update(int ownerId, int carId)
+        {
+            var carOwner = new CarOwner()
+            {
+                Car = db.Cars.Find(carId),
+                Owner = db.Owners.Find(ownerId),
+                CarId = carId,
+                OwnerId = ownerId
+            };
+
+            var owner = db.Owners.Include(x => x.CarOwners).Where(x => x.Id == ownerId).FirstOrDefault();
+            owner.CarOwners.Add(carOwner);
+            this.Update(owner);
+            db.SaveChanges();
         }
     }
 }
