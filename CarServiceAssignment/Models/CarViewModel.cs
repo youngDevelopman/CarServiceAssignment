@@ -33,6 +33,6 @@ namespace CarServiceAssignment.Models
         [Display(Name = "Year")]
         public DateTime? Year { get; set; }
 
-        public virtual ICollection<OwnerViewModel> CarOwners { get; set; }
+        public  ICollection<OwnerViewModel> CarOwners { get; set; }
     }
 }

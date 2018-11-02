@@ -26,6 +26,6 @@ namespace CarServiceAssignment.Models
         public string DrivingExperience { get; set; }
 
         [Display(Name = "Which car he/she has")]
-        public virtual ICollection<CarViewModel> CarOwners { get; set; }
+        public  ICollection<CarViewModel> CarOwners { get; set; }
     }
 }
