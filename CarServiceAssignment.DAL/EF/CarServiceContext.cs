@@ -15,6 +15,7 @@ namespace CarServiceAssignment.DAL.EF
         public CarServiceContext(DbContextOptions<CarServiceContext> options)
             :base(options)
         {
+            //Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 
@@ -37,12 +38,12 @@ namespace CarServiceAssignment.DAL.EF
             modelBuilder.Entity<CarOwner>()
                 .HasOne(sc => sc.Car)
                 .WithMany(c => c.CarOwners)
-                .HasForeignKey(sc => sc.CarId);
+                .HasForeignKey(sc => sc.CarId).OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<CarOwner>()
                 .HasOne(sc => sc.Owner)
                 .WithMany(c => c.CarOwners)
-                .HasForeignKey(sc => sc.OwnerId);
+                .HasForeignKey(sc => sc.OwnerId).OnDelete(DeleteBehavior.Cascade);
 
             // Data seeding
             modelBuilder.Entity<Car>().HasData(
